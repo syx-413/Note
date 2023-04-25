@@ -1,0 +1,39 @@
+\section{向量代数}
+
+\subsection{空间解析几何}
+
+\paragraph{平面方程}
+
+\paragraph{直线方程}
+
+\paragraph{位置关系}
+
+\paragraph{空间曲线}
+
+\subsubsection{投影}
+
+\paragraph{空间曲面}
+
+\subsection{场论初步}
+
+\paragraph{方向导数}
+
+\paragraph{梯度}
+
+\paragraph{散度与旋度}
+
+直接代入公式。
+
+\textbf{例题：}计算向量场$u(x,y,z)=xy^2i+ye^xj+x\ln(1+z^2)k$在点$P(1,1,0)$的散度和旋度。
+
+解：所以$u(x,y,z)=(P,Q,R)$，$P=xy^2$，$Q=ye^x$，$R=x\ln(1+z^2)$。
+
+$\dfrac{\partial P}{\partial x}=y^2$，$\dfrac{\partial Q}{\partial y}=e^x$，$\dfrac{\partial R}{\partial z}=\dfrac{2zx}{1+z^2}$。
+
+代入$P(1,1,0)$，得到散度$\textrm{div}\,\vec{u}=1+e$。
+
+旋度$\overrightarrow{\textrm{rot}}\,\vec{u}=\left\vert\begin{array}{ccc}
+    \vec{i} & \vec{j} & \vec{k} \\
+    \dfrac{\partial}{\partial x} & \dfrac{\partial}{\partial y} & \dfrac{\partial}{\partial z} \\
+    xy^2 & ye^x & x\ln(1+z^2)
+\end{array}\right\vert=\dfrac{\partial x\ln(1+z^2)}{\partial y}\vec{i}+\dfrac{\partial xy^2}{\partial z}\vec{j}+\dfrac{\partial ye^x}{\partial x}\vec{k}-\dfrac{\partial xy^2}{\partial y}\vec{k}-\dfrac{\partial ye^x}{\partial z}\vec{i}-\dfrac{\partial x\ln(1+z^2)}{\partial x}\vec{j}=0+0+ye^x\vec{k}-2xy\vec{k}-0-\ln(1+z^2)\vec{j}=-\ln(1+z^2)\vec{j}+(ye^x-2xy)\vec{k}=(0,0,e-2)$。

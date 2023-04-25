@@ -1,0 +1,68 @@
+\documentclass{note}
+
+\usepackage{mypackage}
+
+\usepackage{comment}
+\usepackage{array}
+\usepackage{amsmath}
+
+\usepackage{arydshln}
+\usepackage{color}
+\usepackage{rotating}
+\newcommand{\underwrite}[3][]{\genfrac{}{}{#1}{}{\textstyle #2}{\scriptstyle #3}}
+\newcommand{\xdownarrow}[1]{{\left\downarrow\vbox to #1{}\right.\kern-\nulldelimiterspace}}
+\newcommand{\xuparrow}[1]{{\left\uparrow\vbox to #1{}\right.\kern-\nulldelimiterspace}}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\title{数学笔记}
+\author{413}
+\date{{\builddatemonth\today}\protect\footnote{\text{Build \builddate\today}}}%加了build
+
+\begin{document}
+
+\maketitle
+
+\renewcommand{\thefootnote}{\arabic{footnote}}
+\setcounter{footnote}{0}
+\setcounter{tocdepth}{2}%设置深度
+
+\tableofcontents
+
+\newpage
+
+
+%高等数学
+\input{Ad_Math/limit}
+\input{Ad_Math/function}
+\input{Ad_Math/differentiation-of-functions-of-single-variable}
+\input{Ad_Math/integal-of-functions-of-single-variable}
+\input{Ad_Math/vector-algebra-and-space-analytic-geometry}
+\input{Ad_Math/differential-calculus-of-multivariate-functions}
+\input{Ad_Math/integral-calculus-of-multivariate-functions}
+\input{Ad_Math/infinite-series}
+\input{Ad_Math/differential-equation}
+
+\newpage
+
+%线性代数
+\section{↓以下为线性代数部分↓}
+\input{Linear/determinant}
+\input{Linear/matrix}
+\input{Linear/vector}
+\input{Linear/linear-equations-system}
+\input{Linear/similar}
+\input{Linear/quadratic-form}
+
+%概率论
+\input{Probality/random-events-and-probability}
+\input{Probality/random-variables-and-distribution}
+\input{Probality/digital-features}
+\input{Probality/law-of-large-numbers-and-central-limit-theorem}
+\input{Probality/mathematical-statistics}
+
+
+\end{document}
+%\begin{comment},\end{comment}
+% key  theorem analysis partlist multicols myalgorithm 
+% proposition lable \newtheorem 提供定理环境

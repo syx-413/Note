@@ -1,0 +1,553 @@
+% !TeX encoding = UTF-8
+
+%% chhzh123's personal macro package v2.0 2020/03
+%
+%% mypackage.sty
+%
+%% Copyright 2018--2020 chhzh123
+
+% Identification
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mypackage}[2020/03/24]
+
+% Option declarations
+\DeclareOption{english}{\def\chhzhdef@english{\relax}}
+\DeclareOption{slide}{\def\chhzhdef@slide{\relax}}
+\DeclareOption{listings}{\def\chhzhdef@listings{\relax}}
+\DeclareOption{cpp}{\def\chhzhdef@cpp{\relax}}
+\DeclareOption{python}{\def\chhzhdef@python{\relax}}
+\DeclareOption{javascript}{\def\chhzhdef@javascript{\relax}}
+\DeclareOption{linenum}{\def\chhzhdef@linenum{\relax}}
+\DeclareOption{pseudo}{\def\chhzhdef@pseudo{\relax}}
+\DeclareOption{table}{\def\chhzhdef@table{\relax}}
+\DeclareOption{optidef}{\def\chhzhdef@optidef{\relax}}
+\DeclareOption{xelatex}{\def\chhzhdef@xelatex{\relax}}
+
+% Process options
+\ProcessOptions\relax
+
+% Basic packages
+\RequirePackage{amsthm}
+\RequirePackage{amsmath}
+\RequirePackage{amsfonts}
+\RequirePackage{amssymb} %\because\therefore
+\RequirePackage{amsxtra}
+\RequirePackage{mathtools}
+\RequirePackage{etoolbox}
+
+\RequirePackage{nicematrix}
+
+% Figures
+\RequirePackage{tikz}
+\RequirePackage{tikz-cd}
+\RequirePackage{pgfplots}
+\RequirePackage{float}
+\RequirePackage{xcolor}
+
+% Environments
+\RequirePackage{listings}%
+\ifdefined\chhzhdef@slide%
+\lstset{%
+	language=c++,%
+	basicstyle=\small\ttfamily,%
+	keywordstyle=\ttfamily\color{blue!75!black},%
+	commentstyle=\ttfamily\color{green!75!black},%
+	stringstyle=\ttfamily\color{red!75!black},
+	flexiblecolumns,
+	showstringspaces=false,
+	frame=single,
+	escapechar=`,
+	escapeinside=`',
+	breaklines=true,
+	tabsize=4,
+	showtabs=false,
+}%
+\else
+\lstset{%
+	language=c++,%
+	basicstyle=\small\ttfamily,%
+	keywordstyle=\ttfamily\color{blue!75!black},%
+	commentstyle=\ttfamily\color{green!75!black},%
+	stringstyle=\ttfamily\color{red!75!black},
+	flexiblecolumns,
+	showstringspaces=false,
+	frame=single,
+	escapechar=`,
+	escapeinside=`',
+	breaklines=true,
+	tabsize=4,
+	showtabs=false,
+	postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space}
+}%
+\fi
+
+\ifdefined\chhzhdef@cpp%
+\lstset{language=c++}
+\fi
+\ifdefined\chhzhdef@python
+\lstset{language=python}
+\fi
+\ifdefined\chhzhdef@javascript
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\fi
+\ifdefined\chhzhdef@linenum
+\lstset{%
+	numbers=left,
+	stepnumber=1,
+	numbersep=9pt,
+	numberstyle=\scriptsize\color{gray}
+}%
+\fi
+
+\ifdefined\chhzhdef@table
+\RequirePackage{bigstrut}
+\RequirePackage{multirow}
+\RequirePackage{multicol}
+\RequirePackage{booktabs} % itemize
+\RequirePackage{colortbl}
+\RequirePackage{longtable}
+
+\ifdefined\chhzhdef@slide
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+\else
+\RequirePackage{enumitem}
+\fi
+
+\fi % table
+
+\ifdefined\chhzhdef@pseudo
+\RequirePackage{algorithm}
+% \RequirePackage{algorithmic}
+\RequirePackage[noend]{algpseudocode}
+\fi
+
+\ifdefined\chhzhdef@optidef
+\RequirePackage[short,nocomma]{optidef}
+\fi
+
+% Miscellaneous packages
+\RequirePackage{extarrows}
+\RequirePackage{bm}
+\RequirePackage{bbm}
+\RequirePackage{yhmath} % wideparen, widehat
+\RequirePackage{esint} % underset, oiint
+\RequirePackage{pifont} % tick, cross, ref: https://tex.stackexchange.com/questions/42619/x-mark-to-match-checkmark
+\RequirePackage{cases} % multiple cases labeling
+\RequirePackage{subeqnarray}
+
+% Sets
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\rn}{\mathbb{R}^n}
+\newcommand{\bbs}{\mathbb{S}}
+\newcommand{\qq}{\mathbb{Q}}
+% Be careful! These commands should be deprecated!
+\newcommand{\mC}{\mathbf{C}}
+\newcommand{\mH}{\mathbf{H}}
+\newcommand{\mA}{\mathcal{A}}
+\newcommand{\mB}{\mathcal{B}}
+\newcommand{\mD}{\mathcal{D}}
+\newcommand{\mE}{\mathcal{E}}
+\newcommand{\mF}{\mathcal{F}}
+\newcommand{\mG}{\mathcal{G}}
+\newcommand{\mI}{\mathcal{I}}
+\newcommand{\mJ}{\mathcal{J}}
+\newcommand{\mK}{\mathcal{K}}
+\newcommand{\mL}{\mathcal{L}}
+\newcommand{\mM}{\mathcal{M}}
+\newcommand{\mN}{\mathcal{N}}
+\newcommand{\mO}{\mathcal{O}}
+\newcommand{\mP}{\mathcal{P}}
+\newcommand{\mQ}{\mathcal{Q}}
+\newcommand{\mR}{\mathcal{R}}
+\newcommand{\mS}{\mathcal{S}}
+\newcommand{\mT}{\mathcal{T}}
+\newcommand{\mU}{\mathcal{U}}
+\newcommand{\mV}{\mathcal{V}}
+\newcommand{\mW}{\mathcal{W}}
+\newcommand{\mX}{\mathcal{X}}
+\newcommand{\mY}{\mathcal{Y}}
+\newcommand{\mZ}{\mathcal{Z}}
+% Canonical usage
+\newcommand{\sA}{\mathcal{A}}
+\newcommand{\sB}{\mathcal{B}}
+\newcommand{\sC}{\mathcal{C}}
+\newcommand{\sD}{\mathcal{D}}
+\newcommand{\sE}{\mathcal{E}}
+\newcommand{\sF}{\mathcal{F}}
+\newcommand{\sG}{\mathcal{G}}
+\newcommand{\sH}{\mathcal{H}}
+\newcommand{\sI}{\mathcal{I}}
+\newcommand{\sJ}{\mathcal{J}}
+\newcommand{\sK}{\mathcal{K}}
+\newcommand{\sL}{\mathcal{L}}
+\newcommand{\sM}{\mathcal{M}}
+\newcommand{\sN}{\mathcal{N}}
+\newcommand{\sO}{\mathcal{O}}
+\newcommand{\sP}{\mathcal{P}}
+\newcommand{\sQ}{\mathcal{Q}}
+\newcommand{\sR}{\mathcal{R}}
+\newcommand{\sS}{\mathcal{S}}
+\newcommand{\sT}{\mathcal{T}}
+\newcommand{\sU}{\mathcal{U}}
+\newcommand{\sV}{\mathcal{V}}
+\newcommand{\sW}{\mathcal{W}}
+\newcommand{\sX}{\mathcal{X}}
+\newcommand{\sY}{\mathcal{Y}}
+\newcommand{\sZ}{\mathcal{Z}}
+
+% Vectors and Matries
+\newcommand{\va}{\mathbf{a}}
+\newcommand{\vb}{\mathbf{b}}
+\newcommand{\vc}{\mathbf{c}}
+\newcommand{\vd}{\mathbf{d}}
+\newcommand{\ve}{\mathbf{e}}
+\newcommand{\vf}{\mathbf{f}}
+\newcommand{\vg}{\mathbf{g}}
+\newcommand{\vh}{\mathbf{h}}
+\newcommand{\vi}{\mathbf{i}}
+\newcommand{\vj}{\mathbf{j}}
+\newcommand{\vk}{\mathbf{k}}
+\newcommand{\vl}{\mathbf{l}}
+\newcommand{\vm}{\mathbf{m}}
+\newcommand{\vn}{\mathbf{n}}
+\newcommand{\vo}{\mathbf{o}}
+\newcommand{\vp}{\mathbf{p}}
+\newcommand{\vq}{\mathbf{q}}
+\newcommand{\vr}{\mathbf{r}}
+\newcommand{\vs}{\mathbf{s}}
+\newcommand{\vt}{\mathbf{t}}
+\newcommand{\vu}{\mathbf{u}}
+\newcommand{\vv}{\mathbf{v}}
+\newcommand{\vw}{\mathbf{w}}
+\newcommand{\vx}{\mathbf{x}}
+\newcommand{\vy}{\mathbf{y}}
+\newcommand{\vz}{\mathbf{z}}
+\newcommand{\vA}{\mathbf{A}}
+\newcommand{\vB}{\mathbf{B}}
+\newcommand{\vC}{\mathbf{C}}
+\newcommand{\vD}{\mathbf{D}}
+\newcommand{\vE}{\mathbf{E}}
+\newcommand{\vF}{\mathbf{F}}
+\newcommand{\vG}{\mathbf{G}}
+\newcommand{\vH}{\mathbf{H}}
+\newcommand{\vI}{\mathbf{I}}
+\newcommand{\vJ}{\mathbf{J}}
+\newcommand{\vK}{\mathbf{K}}
+\newcommand{\vL}{\mathbf{L}}
+\newcommand{\vM}{\mathbf{M}}
+\newcommand{\vN}{\mathbf{N}}
+\newcommand{\vO}{\mathbf{O}}
+\newcommand{\vP}{\mathbf{P}}
+\newcommand{\vQ}{\mathbf{Q}}
+\newcommand{\vR}{\mathbf{R}}
+\newcommand{\vS}{\mathbf{S}}
+\newcommand{\vT}{\mathbf{T}}
+\newcommand{\vU}{\mathbf{U}}
+\newcommand{\vV}{\mathbf{V}}
+\newcommand{\vW}{\mathbf{W}}
+\newcommand{\vX}{\mathbf{X}}
+\newcommand{\vY}{\mathbf{Y}}
+\newcommand{\vZ}{\mathbf{Z}}
+\newcommand{\vzero}{\mathbf{0}}
+\newcommand{\vone}{\mathbf{1}}
+\newcommand{\valpha}{\bm{\alpha}}
+\newcommand{\vbeta}{\bm{\beta}}
+\newcommand{\vgamma}{\bm{\gamma}}
+\newcommand{\vdelta}{\bm{\delta}}
+\newcommand{\vepsilon}{\bm{\epsilon}}
+\newcommand{\veps}{\bm{\varepsilon}}
+\newcommand{\vzeta}{\bm{\zeta}}
+\newcommand{\veta}{\bm{\eta}}
+\newcommand{\vtheta}{\bm{\theta}}
+\newcommand{\viota}{\bm{\iota}}
+\newcommand{\vkappa}{\bm{\kappa}}
+\newcommand{\vlambda}{\bm{\lambda}}
+\newcommand{\vmu}{\bm{\mu}}
+\newcommand{\vnu}{\bm{\nu}}
+\newcommand{\vxi}{\bm{\xi}}
+\newcommand{\vomicron}{\bm{\omicron}}
+\newcommand{\vpi}{\bm{\pi}}
+\newcommand{\vrho}{\bm{\rho}}
+\newcommand{\vsigma}{\bm{\sigma}}
+\newcommand{\vtau}{\bm{\tau}}
+\newcommand{\vupsilon}{\bm{\upsilon}}
+\newcommand{\vphi}{\bm{\phi}}
+\newcommand{\vchi}{\bm{\chi}}
+\newcommand{\vpsi}{\bm{\psi}}
+\newcommand{\vomega}{\bm{\omega}}
+
+% Norms
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+% Brackets
+\newcommand{\lrp}[1]{\left( #1 \right)} % parenthesis
+\newcommand{\lrs}[1]{\left[ #1 \right]} % square bracket
+\newcommand{\lrabs}[1]{\left| #1 \right|}
+\newcommand{\nums}[1]{\left\{#1\right\}}
+\newcommand{\lrb}[1]{\left\{#1\right\}} % brace
+% \newcommand{\setenu}[2]{\{#1,\dots,#2\}}
+\newcommand{\lrang}[1]{\langle #1\rangle}
+\newcommand{\lrfloor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\lrceil}[1]{\left\lceil #1 \right\rceil}
+\newcommand{\Bigbr}[2]{\begin{cases}#1\\#2\end{cases}}
+
+% Forced upright brackets (pppppass)
+% Note that this is especially useful in kaiti paragraphs
+\newcommand{\nrbr}[1]{{\normalfont(}{#1}{\normalfont)}}
+\newcommand{\nsbr}[1]{{\normalfont[}{#1}{\normalfont]}}
+
+% Matrix
+\newcommand{\bmat}[1]{{\begin{bmatrix} #1 \end{bmatrix}}} % [ ]
+\newcommand{\vmat}[1]{{\begin{vmatrix} #1 \end{vmatrix}}} % | |
+
+% Differential operators
+\newcommand{\diff}{\,\mathrm{d}}
+\newcommand{\ddx}[1][]{\dfrac{\diff #1}{\diff x}}
+\newcommand{\ddxs}[1][]{\dfrac{\diff^2 #1}{\diff x^2}}
+\newcommand{\pd}[2]{\dfrac{\partial #1}{\partial #2}}
+\newcommand{\pdd}[2]{\dfrac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\pddxy}[3]{\dfrac{\partial^2 #1}{\partial #2\partial #3}}
+\newcommand{\pddd}[4]{\dfrac{\partial^#1 #2}{\partial #3\partial #4}}
+
+% Miscellaneous commands
+\newcommand{\eps}{\varepsilon}
+\newcommand{\degree}{^{\circ}}
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\jj}{\mathrm{j}}
+\newcommand{\kk}{\mathrm{k}}
+\newcommand{\disp}{\displaystyle}
+\newcommand{\mmid}{\enspace\Big|\enspace}
+% \newcommand{\delx}{\Delta x}
+\ifdefined\chhzhdef@xelatex
+\else
+\newcommand{\T}{\mathrm{T}} % transpose
+\fi
+\newcommand{\arc}[1]{\wideparen{#1}}
+\newcommand{\ol}[1]{\mathop{\overline{#1}}}
+\newcommand{\cmark}{\ding{51}} % tick
+\newcommand{\xmark}{\ding{55}} % cross x
+
+% Quantumn computing
+\newcommand{\qb}[1]{|#1\rangle}
+
+% Math operators
+%% Common use
+% \DeclareMathOperator{\exp}{\mathrm{exp}}
+\DeclareMathOperator{\sgn}{\mathrm{sgn}}
+\DeclareMathOperator{\dom}{\mathrm{dom}}
+\DeclareMathOperator{\sech}{\mathrm{sech}}
+\DeclareMathOperator{\csch}{\mathrm{csch}}
+% \DeclareMathOperator{\coth}{\mathrm{coth}}
+%% Analysis
+\DeclareMathOperator{\grad}{\mathrm{grad}}
+\DeclareMathOperator{\rot}{\mathrm{rot}}
+\DeclareMathOperator{\opdiv}{\mathrm{div}}
+\DeclareMathOperator{\opint}{\mathrm{int}}
+\DeclareMathOperator{\oprelint}{\mathrm{relint}}
+%% Linear Algebra
+\DeclareMathOperator{\opdim}{\mathrm{dim}}
+\DeclareMathOperator{\oprank}{\mathrm{rank}}
+\DeclareMathOperator{\opspan}{\mathrm{Span}}
+\DeclareMathOperator{\opcol}{\mathrm{Col}}
+\DeclareMathOperator{\opnul}{\mathrm{Nul}}
+\DeclareMathOperator{\oprow}{\mathrm{Row}}
+\DeclareMathOperator{\optv}{\mathrm{TVar}}
+\DeclareMathOperator{\optr}{\mathrm{tr}}
+\DeclareMathOperator{\opker}{\mathrm{Ker}}
+\DeclareMathOperator{\opaff}{\mathrm{aff}}
+\DeclareMathOperator{\opconv}{\mathrm{conv}}
+\DeclareMathOperator{\opproj}{\mathrm{proj}}
+\DeclareMathOperator{\opdiag}{\mathrm{diag}}
+\DeclareMathOperator{\opcond}{\mathrm{cond}}
+%% Probability
+\newcommand{\pr}[1]{\mathbb{P}\left(#1\right)}
+\newcommand{\prc}[2]{\mathbb{P}\left(#1\mid #2\right)}
+\newcommand{\E}[1]{\mathbb{E}\left(#1\right)}
+\newcommand{\Var}[1]{\mathbb{D}\left(#1\right)}
+\newcommand{\Cov}[1]{\mathrm{Cov}\left(#1\right)}
+% Convex Optimization
+\newcommand{\st}{\text{s.t.}\,}
+\newcommand{\iter}[2]{#1^{(#2)}}
+\DeclareMathOperator{\opprox}{\mathrm{prox}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\arginf}{arg\,inf}
+\DeclareMathOperator*{\argsup}{arg\,sup}
+% Signal Processing
+\DeclareMathOperator{\sinc}{\mathrm{sinc}}
+\DeclareMathOperator{\Real}{\mathrm{Re}}
+\DeclareMathOperator{\Imag}{\mathrm{Im}}
+% Deep Learning
+\DeclareMathOperator{\softmax}{\mathrm{softmax}}
+\DeclareMathOperator{\relu}{\mathrm{ReLU}}
+\DeclareMathOperator{\sigmoid}{\mathrm{sigmoid}}
+\newcommand{\smp}[2]{{#1^{(#2)}}} % sample
+\newcommand{\layer}[2]{{#1^{[#2]}}}
+
+% Huge operators
+%% Summation
+\newcommand{\ssum}[1]{\displaystyle\sum_{n=1}^{\infty}#1}
+\newcommand{\ssumz}[1]{\displaystyle\sum_{n=0}^{\infty}#1}
+\newcommand{\ssumk}[1]{\displaystyle\sum_{k=1}^{\infty}#1}
+\newcommand{\ssumkn}[1]{\displaystyle\sum_{k=1}^{n}#1}
+%% Limits
+\newcommand{\limtoinf}[1]{\displaystyle\lim_{n\to\infty}#1}
+\newcommand{\limxy}[3]{\displaystyle\lim_{\substack{x\to #1\\y\to #2}}#3}
+%% Integration
+\newcommand{\intab}[3]{\displaystyle\int_{#1}^{#2}{#3}\,\diff x}
+\newcommand{\intabu}[4]{\displaystyle\int_{#1}^{#2}{#3}\,\diff #4}
+\newcommand{\intint}[5]{\displaystyle\int_{-\infty}^{#1}\int_{-\infty}^{#2}#3\,\diff #4\,\diff #5}
+\newcommand{\intinf}[2][x]{\displaystyle\int_{-\infty}^{+\infty}#2\diff #1}
+\newcommand{\dnf}[1]{f^{(#1)}}
+\newcommand{\surfaceint}[4]{\displaystyle\iint_{#1}{#2}\diff y\diff z+{#3}\diff z\diff x+{#4}\diff x\diff y}
+
+% Localization words (pppppass)
+\ifdefined\chhzhdef@english%
+\newcommand{\thmdefinitionnamethm}{Definition}%
+\newcommand{\thmconceptnamethm}{Concept}%
+\newcommand{\thmnotationnamethm}{Notation}%
+\newcommand{\thmpropertynamethm}{Property}%
+\newcommand{\thmexamplenamethm}{Example}%
+\newcommand{\thmquestionnamethm}{Question}%
+\newcommand{\thmtheoremnamethm}{Theorem}%
+\newcommand{\thmpropositionthm}{Proposition}
+\newcommand{\thmlemmanamethm}{Lemma}%
+\newcommand{\thmcorollarynamethm}{Corollary}%
+\newcommand{\thmnonumcorollarynamethm}{Corollary}%
+\newcommand{\thmalgorithmnamethm}{Algorithm}%
+\newcommand{\thmproofnamethm}{Proof}%
+\newcommand{\thmanswernamethm}{Answer}%
+\newcommand{\thmremarknamethm}{Remark}%
+\newcommand{\thmabstractnamethm}{Abstract}%
+\newcommand{\thmanalysisnamethm}{Analysis}%
+\newcommand{\thmexercisenamethm}{Exercise}%
+\else%
+\newcommand{\thmdefinitionnamethm}{定义}%
+\newcommand{\thmconceptnamethm}{概念}%
+\newcommand{\thmnotationnamethm}{记号}%
+\newcommand{\thmpropertynamethm}{性质}%
+\newcommand{\thmexamplenamethm}{例}%
+\newcommand{\thmquestionnamethm}{问题}%
+\newcommand{\thmtheoremnamethm}{定理}%
+\newcommand{\thmpropositionthm}{命题}%
+\newcommand{\thmlemmanamethm}{引理}%
+\newcommand{\thmcorollarynamethm}{推论}%
+\newcommand{\thmnonumcorollarynamethm}{推论}%
+\newcommand{\thmalgorithmnamethm}{算法}%
+\newcommand{\thmproofnamethm}{证明}%
+\newcommand{\thmanswernamethm}{解答}%
+\newcommand{\thmremarknamethm}{注}%
+\newcommand{\thmabstractnamethm}{摘要}%
+\newcommand{\thmanalysisnamethm}{分析}%
+\newcommand{\thmexercisenamethm}{练习}%
+\fi%
+
+\ifdefined\chhzhdef@slide%
+{%
+\theoremstyle{plain}%
+\newtheorem{exercise}{\thmexercisenamethm}%
+}%
+\else%
+{%
+\theoremstyle{plain}%
+\newtheorem{definition}{\thmdefinitionnamethm}%
+}%
+{%
+\theoremstyle{plain}%
+\newtheorem{concept}{\thmconceptnamethm}%
+}%
+{%
+\theoremstyle{plain}%
+\newtheorem{notation}{\thmnotationnamethm}%
+}%
+{%
+\theoremstyle{plain}%
+\newtheorem{property}{\thmpropertynamethm}%
+}%
+{%
+\theoremstyle{plain}%
+\newtheorem{example}{\thmexamplenamethm}%
+}%
+\theoremstyle{plain}%
+\newtheorem{question}{\thmquestionnamethm}%
+{%
+\theoremstyle{plain}%
+\newtheorem{theorem}{\thmtheoremnamethm}%
+}%
+{%
+\theoremstyle{plain}%
+\newtheorem{proposition}{\thmpropositionthm}%
+}%
+{%
+\theoremstyle{plain}%
+\newtheorem{lemma}{\thmlemmanamethm}%
+}%
+{%
+\theoremstyle{plain}%
+\newtheorem{corollary}{\thmcorollarynamethm}%
+}%
+{%
+\theoremstyle{plain}%
+\newtheorem*{corollary2}{\thmnonumcorollarynamethm}%
+}%
+{%
+\theoremstyle{plain}%
+\newtheorem{myalgorithm}{\thmalgorithmnamethm}%
+}%
+{%
+\theoremstyle{plain}%
+\newtheorem*{myproof}{\thmproofnamethm}%
+}%
+{%
+\theoremstyle{definition}%
+\newtheorem*{answer}{\thmanswernamethm}%
+}%
+{%
+\theoremstyle{plain}%
+\newtheorem*{remark}{\thmremarknamethm}%
+}%
+{%
+\theoremstyle{plain}%
+\newtheorem*{myabstract}{\thmabstractnamethm}%
+}%
+{%
+\theoremstyle{plain}%
+\newtheorem*{analysis}{\thmanalysisnamethm}%
+}%
+{%
+\theoremstyle{plain}
+\newtheorem{exercise}{\thmexercisenamethm}%
+}%
+\fi
+
+% Enumerate environment (pppppass)
+\newenvironment{partlist}[1][]%
+	{\begin{enumerate}[itemsep=0pt, label={\normalfont(}\alph*{\normalfont)}, wide, labelindent=\parindent, listparindent=\parindent, #1]}%
+	{\end{enumerate}}%
+
+\newcommand{\myhline}{\par\noindent\rule[0.3\baselineskip]{\textwidth}{0.4pt}\par}
+\newenvironment{parttext}{\myhline}{\myhline}
+
+% Chinese text emphasis support
+\newcommand\textemph[1]{\textcolor{blue}{\textbf{#1}}}
+\newcommand\textred[1]{\textcolor{red}{\textbf{#1}}}
